@@ -93,9 +93,9 @@ def get_part_supp_ds(base_dir: str = DATASET_BASE_DIR) -> PandasDF:
 
 
 def run_query(q_num: int, query: Callable):
-    @linetimer(name=f"Overall execution of pandas Query {q_num}", unit="s")
+    @linetimer(name=f"Overall execution of duckdb Query {q_num}", unit="s")
     def run():
-        with CodeTimer(name=f"Get result of pandas Query {q_num}", unit="s"):
+        with CodeTimer(name=f"Get result of duckdb Query {q_num}", unit="s"):
             t0 = timeit.default_timer()
             result = query()
             secs = timeit.default_timer() - t0

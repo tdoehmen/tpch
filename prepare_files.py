@@ -109,5 +109,5 @@ for name in [
     )
     print(df.shape)
     df = df.with_columns([pl.col(pl.Date).cast(pl.Datetime)])
-    df.write_parquet(f"tables_scale_{scale_fac}/{name}.parquet", statistics=True)
+    df.write_parquet(f"tables_scale_{scale_fac}/{name}.parquet", statistics=True, compression=None)
     df.write_ipc(f"tables_scale_{scale_fac}/{name}.feather")
