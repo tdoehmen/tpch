@@ -21,7 +21,8 @@ from common_utils import (
 def _read_ds(con: duckdb.DuckDBPyConnection, path: str, name: str) -> duckdb.DuckDBPyConnection:
     path = f"{path}.{FILE_TYPE}"
     if FILE_TYPE == "parquet":
-        return con.from_parquet(path).create(name)
+        con.from_parquet(path).create(name)
+        return con
     else:
         raise ValueError(f"file type: {FILE_TYPE} not expected")
 
