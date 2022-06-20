@@ -6,6 +6,7 @@ import pandas as pd
 import duckdb
 from linetimer import CodeTimer, linetimer
 from pandas.core.frame import DataFrame as PandasDF
+import multiprocessing
 
 from common_utils import (
     ANSWERS_BASE_DIR,
@@ -21,6 +22,8 @@ from common_utils import (
 def _read_ds(con: duckdb.DuckDBPyConnection, path: str, name: str) -> duckdb.DuckDBPyConnection:
     path = f"{path}.{FILE_TYPE}"
     if FILE_TYPE == "parquet":
+        threads = multiprocessing.cpu_count()
+        con.execute(f"PRAGMA threads = {threads}").fetchdf()
         con.from_parquet(path).create(name)
         return con
     else:
